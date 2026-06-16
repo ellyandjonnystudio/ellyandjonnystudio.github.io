@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unsere Bücher</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --beige:     #F5EFE6;
+    --beige-dark:#EDE4D6;
+    --sage:      #7D9B76;
+    --sage-dark: #5C7A55;
+    --brown:     #5C4033;
+    --text:      #2C2C2C;
+    --muted:     #777;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--beige); font-family: 'Lato', sans-serif; color: var(--text); }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--beige);
+    border-bottom: 1px solid var(--beige-dark);
+    padding: 26px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    box-shadow: 0 2px 10px rgba(92,64,51,0.07);
+    transform: translateY(0);
+    transition: transform 0.35s ease;
+  }
+  .topbar.hidden {
+    transform: translateY(-110%);
+  }
+  .topbar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--brown);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .topbar-nav {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .topbar-nav a {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .topbar-nav a:hover { color: var(--sage-dark); }
+  .topbar-nav a.active { color: var(--sage-dark); border-bottom: 2px solid var(--sage); padding-bottom: 2px; }
+
+  /* DROPDOWN */
+  .nav-item { position: relative; }
+  .dropdown {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    background: white;
+    border: 1px solid var(--beige-dark);
+    border-top: 2px solid var(--sage);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 8px 24px rgba(92,64,51,0.12);
+    min-width: 230px;
+    z-index: 100;
+    padding: 8px 0;
+  }
+  .nav-item:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+  }
+  .dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0; right: 0;
+    height: 10px;
+  }
+  .dropdown a {
+    display: block;
+    padding: 13px 26px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+  }
+  .dropdown a:hover { background: var(--beige); color: var(--sage-dark); }
+
+  /* HERO */
+  .hero { background: var(--beige-dark); text-align: center; padding: 72px 24px 60px; border-bottom: 2px solid var(--sage); margin-top: 70px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 6vw, 62px); color: var(--brown); margin-bottom: 10px; }
+  .hero-tagline { font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; color: var(--muted); margin-bottom: 16px; }
+  .hero-desc { font-size: 17px; color: var(--text); max-width: 640px; margin: 0 auto; line-height: 1.9; }
+
+  /* GRID */
+  .grid-section { max-width: 1400px; margin: 0 auto; padding: 52px 24px 72px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
+
+  /* KARTE */
+  .card { background: white; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 12px rgba(92,64,51,0.08); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(92,64,51,0.14); }
+
+  .card-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+  .card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+  .card-emoji { font-size: 28px; margin-bottom: 10px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--brown); margin-bottom: 6px; line-height: 1.3; }
+  .card-desc { font-size: 14px; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 16px; }
+  .card-btn { display: block; text-align: center; background: var(--sage); color: white; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px; border-radius: 2px; transition: background 0.2s; }
+  .card-btn:hover { background: var(--sage-dark); }
+
+  /* FOOTER */
+  .footer {
+    background: var(--brown);
+    color: rgba(255,255,255,0.85);
+    padding: 48px 32px 32px;
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .footer-brand-desc {
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+  }
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-bottom-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+  .footer-bottom-legal {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-bottom-legal a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-bottom-legal a:hover { color: rgba(255,255,255,0.8); }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <a class="topbar-logo" href="https://www.ellyandjonny.de">EllyandJonny</a>
+  <ul class="topbar-nav">
+    <li><a href="">Start</a></li>
+    <li class="nav-item">
+        <a href="https://www.ellyandjonny.de/s-projects-basic" class="active">Unsere Bücher ▾</a>
+        <div class="dropdown">
+          <a href="https://www.ellyandjonny.de/kack-mich-schlau-junior">🧒 Kack mich schlau! Junior</a>
+          <a href="https://www.ellyandjonny.de/kack-dich-schlau">💩 Kack dich schlau!</a>
+          <a href="https://www.ellyandjonny.de/humor-geschenke">😂 Humor &amp; Geschenke</a>
+          <a href="https://www.ellyandjonny.de/familie-erinnerungen">👨‍👩‍👧 Familie &amp; Erinnerungen</a>
+          <a href="https://www.ellyandjonny.de/hochzeit-jga">💍 Hochzeit, JGA &amp; Trauzeugen</a>
+          <a href="https://www.ellyandjonny.de/liebe-beziehung">❤️ Liebe &amp; Beziehung</a>
+          <a href="https://www.ellyandjonny.de/lumo-trilogie">📖 Die Lumo-Trilogie</a>
+          <a href="https://www.ellyandjonny.de/mitmachb%C3%BCcher-f%C3%BCr-kinder">👩‍🚒 Ich bin dabei!</a>
+          <a href="https://www.ellyandjonny.de/wissensreihe-f%C3%BCr-kinder">🚀 Kleine Entdecker</a>
+          <a href="https://www.ellyandjonny.de/camping-dachzelt">⛺ Camping &amp; Dachzelt</a>
+        </div>
+      </li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Unsere B&uuml;cher</h1>
+  <div class="hero-tagline">F&uuml;r jeden einen Grund zu lesen, lachen oder vorlesen.</div>
+  <div class="hero-desc">
+    Unter dem Namen EllyandJonny Studio sind B&uuml;cher entstanden &mdash; humorvoll, herzlich und mit Kinderb&uuml;chern bis hin zu Geschenkb&uuml;chern f&uuml;r jeden Anlass. Hier findest du alle Titel auf einen Blick.
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div class="grid">
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">🧒</div>
+        <div class="card-title">Kack mich schlau! Junior</div>
+        <div class="card-desc">Die Faktenbuch-Reihe f&uuml;r Kinder ab 8. Leo erkl&auml;rt in jedem Band 28 verr&uuml;ckte echte Fakten &mdash; witzig, lehrreich und perfekt f&uuml;rs Klo. 17+ B&auml;nde.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/kack-mich-schlau-junior" target="_self">Alle B&auml;nde ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">💩</div>
+        <div class="card-title">Kack dich schlau!</div>
+        <div class="card-desc">Kurioses Wissen f&uuml;r Erwachsene &mdash; serviert auf dem Klo. Jeder Band steckt voller absurder, echter Fakten rund um ein Thema.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/kack-dich-schlau" target="_self">Alle B&auml;nde ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">😂</div>
+        <div class="card-title">Humor &amp; Geschenke</div>
+        <div class="card-desc">Humorvolle B&uuml;cher f&uuml;r jeden Anlass &mdash; f&uuml;r Kollegen, Hundebesitzer, Gamer und alle, die Lachen lieben.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/humor-geschenke" target="_self">Alle Titel ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">👨‍👩‍👧</div>
+        <div class="card-title">Familie, Eltern &amp; Erinnerungen</div>
+        <div class="card-desc">Pers&ouml;nliche Ausf&uuml;llb&uuml;cher, ehrliche Ratgeber und emotionale Geschenke rund um Familie und Elternschaft.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/familie-erinnerungen" target="_self">Alle Titel ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">💍</div>
+        <div class="card-title">Hochzeit, JGA &amp; Trauzeugen</div>
+        <div class="card-desc">B&uuml;cher und Geschenke f&uuml;r Trauzeugen, Brautjungfern und unvergessliche Junggesellenabschiede.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/hochzeit-jga" target="_self">Alle Titel ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">❤️</div>
+        <div class="card-title">Liebe &amp; Beziehung</div>
+        <div class="card-desc">B&uuml;cher f&uuml;r Paare &mdash; zum Lachen, Nachdenken und N&auml;herkommen. Perfekt als Geschenk oder f&uuml;r einen gemeinsamen Abend.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/liebe-beziehung" target="_self">Alle Titel ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_ad5b74ddf0f3486084dda44d17c29141~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">📖</div>
+        <div class="card-title">Die Lumo-Trilogie</div>
+        <div class="card-desc">Drei liebevoll gestaltete Bilderbücher &uuml;ber Mut, Freundschaft und den eigenen Platz im Leben. Ab 4 Jahren.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/lumo-trilogie" target="_self">Alle B&auml;nde ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">👩‍🚒</div>
+        <div class="card-title">Ich bin dabei!</div>
+        <div class="card-desc">Mitmachb&uuml;cher f&uuml;r Kinder &uuml;ber spannende Berufe &mdash; mit F&auml;llen, R&auml;tseln und echtem Wissen. Ab 6 Jahren.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/mitmachb%C3%BCcher-f%C3%BCr-kinder" target="_self">Alle B&auml;nde ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">🚀</div>
+        <div class="card-title">Kleine Entdecker</div>
+        <div class="card-desc">Spannende Wissensb&uuml;cher rund um Weltraum und Raumfahrt f&uuml;r neugierige Kinder ab 5 Jahren.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/wissensreihe-f%C3%BCr-kinder" target="_self">Alle B&auml;nde ansehen</a>
+      </div>
+    </div>
+
+    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+      <div class="card-body">
+        <div class="card-emoji">⛺</div>
+        <div class="card-title">Camping &amp; Dachzelt-Abenteuer</div>
+        <div class="card-desc">Humorvolle B&uuml;cher und Ratgeber f&uuml;r Camping- und Dachzeltfans &mdash; aus echter Erfahrung geschrieben.</div>
+        <a class="card-btn" href="https://www.ellyandjonny.de/camping-dachzelt" target="_self">Alle Titel ansehen</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">EllyandJonny</div>
+      <p class="footer-brand-desc">Handgemachtes, Bücher und kreative Prints &mdash; mit Liebe gestaltet in Detmold, NRW.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Unsere Shops</div>
+      <ul class="footer-links">
+        <li><a href="https://ellyandjonny.etsy.com" target="_blank">Holz &amp; Wichtelwelt</a></li>
+        <li><a href="https://ellyandjonnyprints.etsy.com" target="_blank">Prints &amp; Kleidung</a></li>
+        <li><a href="https://www.ellyandjonny.de/s-projects-basic">Alle Bücher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Buchserien</div>
+      <ul class="footer-links">
+        <li><a href="https://www.ellyandjonny.de/kack-mich-schlau-junior">Kack mich schlau! Junior</a></li>
+        <li><a href="https://www.ellyandjonny.de/kack-dich-schlau">Kack dich schlau!</a></li>
+        <li><a href="https://www.ellyandjonny.de/lumo-trilogie">Lumo-Trilogie</a></li>
+        <li><a href="https://www.ellyandjonny.de/camping-dachzelt">Camping &amp; Dachzelt</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <ul class="footer-links">
+        <li><a href="mailto:EllyJonnyWenger@gmail.com">EllyJonnyWenger@gmail.com</a></li>
+        <li><a href="https://www.ellyandjonny.de/impressum">Impressum</a></li>
+        <li><a href="https://www.ellyandjonny.de/blank">Datenschutz</a></li>
+        <li><a href="https://www.ellyandjonny.de/blank-1">Barrierefreiheit</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-bottom-copy">&copy; 2026 EllyandJonny. Alle Rechte vorbehalten.</span>
+    <div class="footer-bottom-legal">
+      <a href="https://www.ellyandjonny.de/impressum">Impressum</a>
+      <a href="https://www.ellyandjonny.de/blank">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const nav  = document.querySelector('.topbar');
+  const hero = document.querySelector('.hero');
+
+  function updateNav() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    // hide nav once hero has scrolled out of view
+    nav.classList.toggle('hidden', heroBottom <= 0);
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
+</body>
+</html>
