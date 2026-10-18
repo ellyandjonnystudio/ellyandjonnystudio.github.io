@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<!-- Character encoding and mobile scaling, so umlauts and phone layouts display correctly -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EllyandJonnyStudio</title>
+<!-- Small logo shown in the browser tab -->
 <link rel="icon" href="/bilder/LOGO.png">
+<!-- Fonts from Google: Playfair Display for headings, Lato for normal text -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
 <!-- Stylesheets: base.css must come first, because it defines the color
@@ -17,13 +20,17 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!-- TOP BAR: fixed bar at the top with the logo and the main menu -->
 <nav class="topbar">
   <a class="topbar-logo" href="https://www.ellyandjonny.de">EllyandJonny</a>
+  <!-- MOBILE: hamburger menu button (☰); hidden on desktop, opens the menu on phones -->
+  <button class="menu-button" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
   <ul class="topbar-nav">
     <li><a href="">Start</a></li>
+    <!-- "Unsere Bücher" menu item; the dropdown below opens on mouse hover -->
     <li class="nav-item">
         <a href="https://www.ellyandjonny.de/s-projects-basic" class="active">Unsere Bücher ▾</a>
+        <!-- Dropdown: one link per book category -->
         <div class="dropdown">
           <a href="https://www.ellyandjonny.de/kack-mich-schlau-junior">🧒 Kack mich schlau! Junior</a>
           <a href="https://www.ellyandjonny.de/kack-dich-schlau">💩 Kack dich schlau!</a>
@@ -40,7 +47,7 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO: introduction area with headline, slogan and short description -->
 <div class="hero">
   <h1>Unsere B&uuml;cher</h1>
   <div class="hero-tagline">F&uuml;r jeden einen Grund zu lesen, lachen oder vorlesen.</div>
@@ -49,11 +56,12 @@
   </div>
 </div>
 
-<!-- GRID -->
+<!-- GRID: one card per book category, each with emoji, title, description and a button -->
 <div class="grid-section">
   <div class="grid">
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Kack mich schlau! Junior -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">🧒</div>
         <div class="card-title">Kack mich schlau! Junior</div>
@@ -62,7 +70,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="/bilder/kack_dich_schlau.png">
+    <!-- Card: Kack dich schlau! -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">💩</div>
         <div class="card-title">Kack dich schlau!</div>
@@ -71,7 +80,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Humor & Geschenke -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">😂</div>
         <div class="card-title">Humor &amp; Geschenke</div>
@@ -80,7 +90,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Familie, Eltern & Erinnerungen -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">👨‍👩‍👧</div>
         <div class="card-title">Familie, Eltern &amp; Erinnerungen</div>
@@ -89,7 +100,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Hochzeit, JGA & Trauzeugen -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">💍</div>
         <div class="card-title">Hochzeit, JGA &amp; Trauzeugen</div>
@@ -98,7 +110,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Liebe & Beziehung -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">❤️</div>
         <div class="card-title">Liebe &amp; Beziehung</div>
@@ -107,7 +120,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_ad5b74ddf0f3486084dda44d17c29141~mv2.png">
+    <!-- Card: Die Lumo-Trilogie -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">📖</div>
         <div class="card-title">Die Lumo-Trilogie</div>
@@ -116,7 +130,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Ich bin dabei! -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">👩‍🚒</div>
         <div class="card-title">Ich bin dabei!</div>
@@ -125,7 +140,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Kleine Entdecker -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">🚀</div>
         <div class="card-title">Kleine Entdecker</div>
@@ -134,7 +150,8 @@
       </div>
     </div>
 
-    <div class="card"><img class="card-img" src="https://static.wixstatic.com/media/ddd80e_94821cfa74dc48b88a6f93f3251434e1~mv2.png">
+    <!-- Card: Camping & Dachzelt-Abenteuer -->
+    <div class="card">
       <div class="card-body">
         <div class="card-emoji">⛺</div>
         <div class="card-title">Camping &amp; Dachzelt-Abenteuer</div>
@@ -146,13 +163,15 @@
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER: brand info, link columns and copyright at the bottom of the page -->
 <footer class="footer">
   <div class="footer-inner">
+    <!-- Column 1: brand name and short description -->
     <div>
       <div class="footer-brand-name">EllyandJonny</div>
       <p class="footer-brand-desc">Handgemachtes, Bücher und kreative Prints &mdash; mit Liebe gestaltet in Detmold, NRW.</p>
     </div>
+    <!-- Column 2: links to the Etsy shops and all books -->
     <div>
       <div class="footer-col-title">Unsere Shops</div>
       <ul class="footer-links">
@@ -161,6 +180,7 @@
         <li><a href="https://www.ellyandjonny.de/s-projects-basic">Alle Bücher</a></li>
       </ul>
     </div>
+    <!-- Column 3: links to the main book series -->
     <div>
       <div class="footer-col-title">Buchserien</div>
       <ul class="footer-links">
@@ -170,6 +190,7 @@
         <li><a href="https://www.ellyandjonny.de/camping-dachzelt">Camping &amp; Dachzelt</a></li>
       </ul>
     </div>
+    <!-- Column 4: contact email and legal pages -->
     <div>
       <div class="footer-col-title">Kontakt</div>
       <ul class="footer-links">
@@ -180,6 +201,7 @@
       </ul>
     </div>
   </div>
+  <!-- Bottom row: copyright on the left, legal links on the right -->
   <div class="footer-bottom">
     <span class="footer-bottom-copy">&copy; 2026 EllyandJonny. Alle Rechte vorbehalten.</span>
     <div class="footer-bottom-legal">
@@ -190,18 +212,33 @@
 </footer>
 
 
+<!-- SCRIPT: hides the top bar once the visitor has scrolled past the hero,
+     and (MOBILE) opens/closes the hamburger menu on phones -->
 <script>
   const nav  = document.querySelector('.topbar');
   const hero = document.querySelector('.hero');
 
+  // Checks where the hero is and shows or hides the top bar accordingly
   function updateNav() {
     const heroBottom = hero.getBoundingClientRect().bottom;
     // hide nav once hero has scrolled out of view
     nav.classList.toggle('hidden', heroBottom <= 0);
   }
 
+  // Run the check on every scroll, and once right away when the page loads
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
+
+  // MOBILE: opens and closes the hamburger menu when the ☰ button is tapped
+  const menuButton = document.querySelector('.menu-button');
+
+  menuButton.addEventListener('click', () => {
+    const menuIsOpen = nav.classList.toggle('menu-open');
+    // Switch the icon between ☰ (closed) and ✕ (open) and update the screen reader info
+    menuButton.textContent = menuIsOpen ? '✕' : '☰';
+    menuButton.setAttribute('aria-expanded', menuIsOpen);
+    menuButton.setAttribute('aria-label', menuIsOpen ? 'Menü schließen' : 'Menü öffnen');
+  });
 </script>
 </body>
 </html>

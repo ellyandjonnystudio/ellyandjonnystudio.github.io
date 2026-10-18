@@ -160,3 +160,109 @@
   background: var(--beige);
   color: var(--sage-dark);
 }
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   Everything below this line is only for the phone version of the page.
+   On larger screens these rules are ignored, so the desktop stays unchanged.
+   ########################################################################## */
+
+/* --------------------------------------------------------------------------
+   Hamburger menu button (☰)
+   The button exists in the HTML on every screen size, but is hidden on
+   desktop. It only becomes visible inside the mobile media query below.
+   -------------------------------------------------------------------------- */
+.menu-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  /* Top bar: no longer fixed to the window, it scrolls away with the page.
+     This avoids the bar covering the hero and saves screen space on phones. */
+  .topbar {
+    position: static;
+    padding: 16px;
+  }
+
+  /* The hide-on-scroll animation is not needed when the bar is not fixed */
+  .topbar.hidden {
+    transform: none;
+  }
+
+  /* Smaller logo so logo and menu button fit into one row */
+  .topbar-logo {
+    font-size: 26px;
+  }
+
+  /* Show the ☰ button; 44x44px is the recommended minimum size for touch */
+  .menu-button {
+    display: block;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+    line-height: 1;
+    background: none;
+    border: none;
+    color: var(--brown);
+    cursor: pointer;
+  }
+
+  /* Menu list: hidden until the ☰ button is tapped.
+     "width: 100%" makes it wrap into its own row below logo and button. */
+  .topbar-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--beige-dark);
+  }
+
+  /* IMPORTANT: the class "menu-open" is added by the JavaScript in
+     index.html when the ☰ button is tapped, and shows the menu */
+  .topbar.menu-open .topbar-nav {
+    display: flex;
+  }
+
+  /* Menu links as full-width rows that are easy to tap */
+  .topbar-nav a {
+    display: block;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  /* No underline for the active link inside the opened menu */
+  .topbar-nav a.active {
+    border-bottom: none;
+  }
+
+  /* Dropdown: on phones there is no hover, so the categories are shown as
+     a simple indented list inside the opened menu instead of a floating box.
+     The ":hover" selector is also reset, because tapping can trigger it. */
+  .dropdown,
+  .nav-item:hover .dropdown {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    min-width: 0;
+    padding: 0 0 8px 16px;
+  }
+
+  /* The invisible hover bridge of the desktop dropdown is not needed */
+  .dropdown::before {
+    display: none;
+  }
+
+  /* Category links: allow line breaks for long names on narrow screens */
+  .dropdown a {
+    padding: 10px 0;
+    font-size: 15px;
+    white-space: normal;
+  }
+}

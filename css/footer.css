@@ -109,3 +109,29 @@
 .footer-bottom-legal a:hover {
   color: rgba(255, 255, 255, 0.8);
 }
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   The footer columns already drop below each other on their own
+   (see "auto-fit" above); here only the spacing is reduced.
+   ########################################################################## */
+@media (max-width: 768px) {
+
+  /* Less padding around the footer on narrow screens */
+  .footer {
+    padding: 40px 16px 24px;
+  }
+
+  /* Smaller gaps between the stacked columns */
+  .footer-inner {
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  /* Copyright and legal links stacked above each other */
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

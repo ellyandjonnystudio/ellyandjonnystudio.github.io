@@ -40,3 +40,29 @@
   margin: 0 auto;  /* centers the text block horizontally */
   line-height: 1.9;
 }
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   Only for the phone version; the desktop is not affected.
+   ########################################################################## */
+@media (max-width: 768px) {
+
+  /* IMPORTANT: on phones the top bar is no longer fixed (see
+     navigation.css), so the space reserved for it is removed here.
+     Side spacing is reduced so the text gets more room. */
+  .hero {
+    margin-top: 0;
+    padding: 48px 16px 40px;
+  }
+
+  /* Slightly smaller text for narrow screens */
+  .hero-tagline,
+  .hero-desc {
+    font-size: 16px;
+  }
+
+  .hero-desc {
+    line-height: 1.7;
+  }
+}

@@ -107,3 +107,34 @@
 .card-btn:hover {
   background: var(--sage-dark);
 }
+
+
+/* ##########################################################################
+   RESPONSIVE GRID (tablets and phones)
+   Fewer cards per row on smaller screens, so they do not become too narrow.
+   On desktop (wider than 1024px) the grid keeps its four columns.
+   ########################################################################## */
+
+/* Tablets and small laptops (up to 1024px): two cards per row */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Phones (up to 600px): one card per row, less space around the grid */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .grid-section {
+    padding: 32px 16px 48px;
+  }
+
+  .card-body {
+    padding: 24px;
+  }
+}
