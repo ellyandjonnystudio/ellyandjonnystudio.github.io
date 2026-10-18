@@ -1,0 +1,42 @@
+/* ==========================================================================
+   HERO
+   The large introduction area at the top of the page with the headline
+   "Unsere Bücher", a short tagline and a description text.
+   ========================================================================== */
+
+.hero {
+  background: var(--beige-dark);
+  text-align: center;
+  padding: 72px 24px 60px;
+  border-bottom: 2px solid var(--sage);
+
+  /* Pushes the hero down so it is not hidden behind the fixed top bar */
+  margin-top: 70px;
+}
+
+/* Main headline; clamp() scales the font size with the window width,
+   but never smaller than 38px or larger than 62px */
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 6vw, 62px);
+  color: var(--brown);
+  margin-bottom: 10px;
+}
+
+/* Short italic slogan below the headline */
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* Description paragraph; limited width keeps lines short and easy to read */
+.hero-desc {
+  font-size: 17px;
+  color: var(--text);
+  max-width: 640px;
+  margin: 0 auto;  /* centers the text block horizontally */
+  line-height: 1.9;
+}

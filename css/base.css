@@ -1,0 +1,45 @@
+/* ==========================================================================
+   BASE STYLES
+   Shared foundation for every page: the color palette and global resets.
+   This file must be loaded first, because all other CSS files use the
+   color variables defined here.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Color palette
+   Defined once as CSS variables, so a color can be changed in one place and
+   updates everywhere it is used via var(--name).
+   -------------------------------------------------------------------------- */
+:root {
+  --beige:      #F5EFE6;  /* main page background */
+  --beige-dark: #EDE4D6;  /* slightly darker beige for the hero and borders */
+  --sage:       #7D9B76;  /* green accent: buttons, underlines, highlights */
+  --sage-dark:  #5C7A55;  /* darker green for hover states */
+  --brown:      #5C4033;  /* headings, logo and footer background */
+  --text:       #2C2C2C;  /* default text color (soft black) */
+  --muted:      #777;     /* grey for secondary text like descriptions */
+}
+
+/* --------------------------------------------------------------------------
+   Global reset
+   Browsers add their own default margins and paddings to many elements.
+   Removing them gives us a clean, predictable starting point.
+   "border-box" makes width/height include padding and border, so elements
+   do not grow larger than the size we give them.
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Page body
+   Sets the background color, the default font (Lato, loaded from Google
+   Fonts in the HTML head) and the default text color for the whole page.
+   -------------------------------------------------------------------------- */
+body {
+  background: var(--beige);
+  font-family: 'Lato', sans-serif;
+  color: var(--text);
+}

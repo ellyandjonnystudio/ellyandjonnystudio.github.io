@@ -1,0 +1,162 @@
+/* ==========================================================================
+   NAVIGATION
+   The top bar with the logo and menu links, including the dropdown menu
+   that lists all book categories under "Unsere Bücher".
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Top bar
+   Fixed to the top of the window, so it stays visible while scrolling.
+   Logo on the left, menu on the right (flexbox with space-between).
+   The slide animation is used by the script at the end of index.html,
+   which hides the bar once the hero section has scrolled out of view.
+   -------------------------------------------------------------------------- */
+.topbar {
+  background: var(--beige);
+  border-bottom: 1px solid var(--beige-dark);
+  padding: 26px 48px;
+
+  /* Place logo and menu side by side; wrap onto two lines on narrow screens */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  /* Stick to the top edge across the full width, above all other content */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  box-shadow: 0 2px 10px rgba(92, 64, 51, 0.07);
+
+  /* Start in the visible position and animate any position change smoothly */
+  transform: translateY(0);
+  transition: transform 0.35s ease;
+}
+
+/* Added by JavaScript: moves the bar up and out of the window */
+.topbar.hidden {
+  transform: translateY(-110%);
+}
+
+/* The "EllyandJonny" logo text on the left */
+.topbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--brown);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   Menu links
+   The list of links on the right side of the top bar.
+   -------------------------------------------------------------------------- */
+.topbar-nav {
+  display: flex;
+  gap: 24px;
+  list-style: none;  /* removes the bullet points of the <ul> */
+  flex-wrap: wrap;
+}
+
+.topbar-nav a {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+/* Turn a link green while the mouse is over it */
+.topbar-nav a:hover {
+  color: var(--sage-dark);
+}
+
+/* Marks the link of the page the visitor is currently on (green underline) */
+.topbar-nav a.active {
+  color: var(--sage-dark);
+  border-bottom: 2px solid var(--sage);
+  padding-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Dropdown menu
+   A white box below "Unsere Bücher" that fades in on mouse hover.
+   It is always present in the page but invisible until hovered, so it can
+   be animated (display: none cannot be animated).
+   -------------------------------------------------------------------------- */
+
+/* The menu item that holds the dropdown; the dropdown is positioned relative to it */
+.nav-item {
+  position: relative;
+}
+
+.dropdown {
+  /* Hidden by default: invisible, transparent and shifted slightly upwards */
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-6px);
+
+  /* Fade out first, then switch visibility off after 0.2s (when hiding) */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+
+  /* Placed 10px below the menu item and centered under it */
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+
+  background: white;
+  border: 1px solid var(--beige-dark);
+  border-top: 2px solid var(--sage);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 8px 24px rgba(92, 64, 51, 0.12);
+  min-width: 230px;
+  z-index: 100;
+  padding: 8px 0;
+}
+
+/* Show the dropdown while the mouse is over the menu item */
+.nav-item:hover .dropdown {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  /* Switch visibility on immediately when showing */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+}
+
+/* Invisible 10px bridge above the dropdown, filling the gap to the menu item.
+   Without it, the dropdown would close while moving the mouse down to it. */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+/* One category link inside the dropdown */
+.dropdown a {
+  display: block;  /* makes the whole row clickable, not just the text */
+  padding: 13px 26px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;  /* undoes the uppercase from .topbar-nav a */
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;  /* keeps each category name on a single line */
+}
+
+/* Highlight the hovered row with a beige background and green text */
+.dropdown a:hover {
+  background: var(--beige);
+  color: var(--sage-dark);
+}

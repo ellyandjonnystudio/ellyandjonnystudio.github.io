@@ -1,0 +1,111 @@
+/* ==========================================================================
+   FOOTER
+   Brown area at the bottom of the page with the brand text, link columns
+   (shops, book series, contact) and a bottom row with copyright and
+   legal links.
+   ========================================================================== */
+
+.footer {
+  background: var(--brown);
+  color: rgba(255, 255, 255, 0.85);  /* white at 85% so it is not too harsh */
+  padding: 48px 32px 32px;
+}
+
+/* --------------------------------------------------------------------------
+   Upper part: columns
+   "auto-fit" with "minmax(200px, 1fr)" creates as many columns as fit into
+   the width (each at least 200px). On small screens the columns
+   automatically drop below each other.
+   -------------------------------------------------------------------------- */
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* "EllyandJonny" name in the first column */
+.footer-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+/* Short description below the brand name */
+.footer-brand-desc {
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Small green heading of each column ("Unsere Shops", "Kontakt", ...) */
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+
+/* Link list of a column, stacked vertically without bullet points */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+/* Links become fully white on hover */
+.footer-links a:hover {
+  color: white;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom row
+   Thin separator line, copyright on the left and legal links on the right.
+   -------------------------------------------------------------------------- */
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* "© 2026 EllyandJonny ..." text */
+.footer-bottom-copy {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Impressum / Datenschutz links */
+.footer-bottom-legal {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-bottom-legal a {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-bottom-legal a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
