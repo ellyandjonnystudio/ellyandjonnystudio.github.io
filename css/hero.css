@@ -14,6 +14,22 @@
   margin-top: 70px;
 }
 
+/* Breadcrumb above the headline on category pages: "Startseite › Kategorie" */
+.breadcrumb {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.breadcrumb a {
+  color: var(--sage-dark);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
 /* Main headline; clamp() scales the font size with the window width,
    but never smaller than 38px or larger than 62px */
 .hero h1 {

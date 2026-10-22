@@ -1,0 +1,228 @@
+/* ==========================================================================
+   CATEGORY TILES (homepage)
+   Bento grid with one tile per category. Tiles have different sizes:
+   - featured: the biggest series, 2 columns wide and 2 rows high
+   - wide:     2 columns wide, image and text side by side
+   - normal:   1 column
+   Each tile shows a small fan of covers above its text.
+   ========================================================================== */
+
+.category-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Tile
+   The whole tile is one link, so it is clickable everywhere.
+   -------------------------------------------------------------------------- */
+.category-tile {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(92, 64, 51, 0.08);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Lift the tile slightly on mouse hover */
+.category-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(92, 64, 51, 0.14);
+}
+
+.category-tile--featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Wide tiles place the covers on the left and the text on the right */
+.category-tile--wide {
+  grid-column: span 2;
+  flex-direction: row;
+}
+
+
+/* --------------------------------------------------------------------------
+   Cover fan
+   Three covers next to each other: the outer ones slightly tilted, the
+   middle one raised. Covers are cut off at the bottom edge on purpose.
+   -------------------------------------------------------------------------- */
+.category-tile-covers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 170px;
+  padding: 24px 16px 0;
+  background: var(--beige-dark);
+  overflow: hidden;
+}
+
+.category-tile--featured .category-tile-covers {
+  flex: 1;
+  height: auto;
+  min-height: 300px;
+}
+
+.category-tile--wide .category-tile-covers {
+  width: 45%;
+  height: auto;
+  min-height: 200px;
+}
+
+.category-tile-covers img {
+  display: block;
+  width: 30%;
+  max-width: 100px;
+  aspect-ratio: 2 / 3;
+  margin: 0 -6px;  /* lets neighbouring covers overlap a little */
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(92, 64, 51, 0.25);
+}
+
+.category-tile--featured .category-tile-covers img {
+  max-width: 170px;
+}
+
+.category-tile-covers img:nth-child(1) {
+  transform: rotate(-6deg);
+}
+
+.category-tile-covers img:nth-child(2) {
+  position: relative;
+  z-index: 1;  /* middle cover lies on top of the other two */
+  transform: translateY(-12px);
+}
+
+.category-tile-covers img:nth-child(3) {
+  transform: rotate(6deg);
+}
+
+
+/* --------------------------------------------------------------------------
+   Tile text
+   -------------------------------------------------------------------------- */
+
+/* "flex: 1" fills the remaining height, so the "Entdecken" link sits at the bottom */
+.category-tile-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+}
+
+.category-tile--featured .category-tile-text {
+  flex: none;
+  padding: 28px 32px 32px;
+}
+
+.category-tile--wide .category-tile-text {
+  justify-content: center;
+}
+
+/* Small green line above the title, e.g. "69 Titel" */
+.category-tile-count {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 6px;
+}
+
+.category-tile-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.category-tile--featured .category-tile-title {
+  font-size: 28px;
+}
+
+.category-tile-description {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.category-tile-link {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+}
+
+.category-tile:hover .category-tile-link {
+  text-decoration: underline;
+}
+
+
+/* ##########################################################################
+   RESPONSIVE LAYOUT (tablets and phones)
+   On desktop (wider than 1024px) the grid keeps its four columns.
+   ########################################################################## */
+
+/* Tablets (up to 1024px): two columns; the featured tile becomes one full-width row */
+@media (max-width: 1024px) {
+  .category-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-tile--featured {
+    grid-row: auto;
+  }
+
+  .category-tile--featured .category-tile-covers {
+    min-height: 240px;
+  }
+}
+
+/* MOBILE (up to 600px): one column; wide tiles stack image and text again */
+@media (max-width: 600px) {
+  .category-tiles {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .category-tile--featured,
+  .category-tile--wide {
+    grid-column: auto;
+  }
+
+  .category-tile--wide {
+    flex-direction: column;
+  }
+
+  .category-tile--wide .category-tile-covers {
+    width: auto;
+    height: 170px;
+    min-height: 0;
+  }
+
+  .category-tile--featured .category-tile-covers {
+    min-height: 220px;
+  }
+
+  .category-tile--featured .category-tile-covers img {
+    max-width: 120px;
+  }
+
+  .category-tile--featured .category-tile-title {
+    font-size: 24px;
+  }
+
+  .category-tile--featured .category-tile-text {
+    padding: 24px;
+  }
+}

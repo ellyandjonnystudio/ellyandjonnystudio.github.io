@@ -43,3 +43,49 @@ body {
   font-family: 'Lato', sans-serif;
   color: var(--text);
 }
+
+/* --------------------------------------------------------------------------
+   Page sections
+   Shared building blocks for the content between hero and footer.
+   -------------------------------------------------------------------------- */
+
+/* Wraps all content sections; the bottom padding keeps space above the footer */
+.page-content {
+  padding-bottom: 72px;
+}
+
+/* One content block with limited width, centered on large screens */
+.content-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 56px 24px 0;
+}
+
+/* Heading above a content block, e.g. "Stöbern nach Kategorie" */
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--brown);
+  margin-bottom: 24px;
+}
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   ########################################################################## */
+@media (max-width: 768px) {
+
+  /* Less space around sections and a smaller heading on narrow screens */
+  .content-section {
+    padding: 40px 16px 0;
+  }
+
+  .section-heading {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .page-content {
+    padding-bottom: 48px;
+  }
+}

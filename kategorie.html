@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Replaced by the category name through js/category-page.js -->
+<title>Kategorie – EllyandJonnyStudio</title>
+<!-- Small logo shown in the browser tab -->
+<link rel="icon" href="/bilder/LOGO.png">
+<!-- Fonts from Google -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<!-- Stylesheets: base.css must come first, because it defines the color
+     variables that all other files use -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/navigation.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/chips.css">
+<link rel="stylesheet" href="css/shelves.css">
+<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+<!--
+  CATEGORY PAGE TEMPLATE
+  One page for all categories. Which category is shown depends on the
+  address, e.g. kategorie.html?kategorie=kinderbuecher. The empty elements
+  below are filled in by js/category-page.js with the data from js/books.js.
+-->
+
+<!-- TOP BAR: fixed bar at the top with the logo and the main menu
+     (copy of it in index.html, remember to change both when editing!) -->
+<nav class="topbar">
+  <a class="topbar-logo" href="https://www.ellyandjonny.de">EllyandJonny</a>
+  <!-- MOBILE: hamburger menu button (☰); hidden on desktop -->
+  <button class="menu-button" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+  <ul class="topbar-nav">
+    <li><a href="index.html">Start</a></li>
+    <!-- "Unsere Bücher" menu item; the dropdown below opens on mouse hover -->
+    <li class="nav-item">
+        <a href="index.html#kategorien" class="active">Unsere Bücher ▾</a>
+        <!-- Dropdown: WIP: one link per book category that may be changed or updated in the future -->
+        <div class="dropdown">
+          <a href="kategorie.html?kategorie=kack-dich-mich-schlau">💩 Kack dich / mich schlau</a>
+          <a href="kategorie.html?kategorie=kinderbuecher">🧒 Kinder- &amp; Jugendbücher</a>
+          <a href="kategorie.html?kategorie=malen-mitmachen">🎨 Malen, Mitmachen &amp; Freundebücher</a>
+          <a href="kategorie.html?kategorie=geschenke">😂 Lustige Geschenke &amp; Survival Guides</a>
+          <a href="kategorie.html?kategorie=familie-paare">👨‍👩‍👧 Familie &amp; Paare</a>
+          <a href="kategorie.html?kategorie=romane">📚 Romane &amp; Thriller</a>
+          <a href="kategorie.html?kategorie=camping">⛺ Camping &amp; Dachzelt</a>
+        </div>
+      </li>
+  </ul>
+</nav>
+
+<!-- HERO: breadcrumb, category name, number of titles and description -->
+<div class="hero">
+  <nav class="breadcrumb">
+    <a href="index.html">Startseite</a> › <span id="breadcrumb-current"></span>
+  </nav>
+  <h1 id="category-title"></h1>
+  <div class="hero-tagline" id="category-summary"></div>
+  <div class="hero-desc" id="category-description"></div>
+</div>
+
+<main class="page-content">
+
+  <!-- SHELVES: jump links to each series, then one shelf per series -->
+  <section class="content-section">
+    <ul class="chip-list" id="series-jump-links"></ul>
+    <div id="shelves"></div>
+  </section>
+
+  <!-- OTHER CATEGORIES: links to the remaining categories -->
+  <section class="content-section">
+    <h2 class="section-heading">Weitere Kategorien</h2>
+    <ul class="chip-list" id="other-categories"></ul>
+  </section>
+
+</main>
+
+<!-- FOOTER: brand info, link columns and copyright at the bottom of the page
+     (same block in index.html – change both when editing) -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">EllyandJonny</div>
+      <p class="footer-brand-desc">Handgemachtes, Bücher und kreative Prints &mdash; mit Liebe gestaltet in Detmold, NRW.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Unsere Shops</div>
+      <ul class="footer-links">
+        <li><a href="https://ellyandjonny.etsy.com" target="_blank">Holz &amp; Wichtelwelt</a></li>
+        <li><a href="https://ellyandjonnyprints.etsy.com" target="_blank">Prints &amp; Kleidung</a></li>
+        <li><a href="index.html#kategorien">Alle Bücher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Buchserien</div>
+      <ul class="footer-links">
+        <li><a href="kategorie.html?kategorie=kack-dich-mich-schlau#kack-mich-schlau-junior">Kack mich schlau! Junior</a></li>
+        <li><a href="kategorie.html?kategorie=kack-dich-mich-schlau#kack-dich-schlau">Kack dich schlau!</a></li>
+        <li><a href="kategorie.html?kategorie=kinderbuecher#lumo-trilogie">Lumo-Trilogie</a></li>
+        <li><a href="kategorie.html?kategorie=camping">Camping &amp; Dachzelt</a></li>
+      </ul>
+    </div>
+    <!-- contact email and legal pages -->
+    <div>
+      <div class="footer-col-title">Kontakt</div>
+      <ul class="footer-links">
+        <li><a href="mailto:EllyJonnyWenger@gmail.com">EllyJonnyWenger@gmail.com</a></li>
+        <li><a href="https://www.ellyandjonny.de/impressum">Impressum</a></li>
+        <li><a href="https://www.ellyandjonny.de/blank">Datenschutz</a></li>
+        <li><a href="https://www.ellyandjonny.de/blank-1">Barrierefreiheit</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- copyright on the left, legal links on the right -->
+  <div class="footer-bottom">
+    <span class="footer-bottom-copy">&copy; 2026 EllyandJonny. Alle Rechte vorbehalten.</span>
+    <div class="footer-bottom-legal">
+      <a href="https://www.ellyandjonny.de/impressum">Impressum</a>
+      <a href="https://www.ellyandjonny.de/blank">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<!-- TEMPLATES: blueprints for one shelf and one book card. They are not
+     shown directly, but copied and filled by js/category-page.js. -->
+<template id="shelf-template">
+  <section class="shelf">
+    <div class="shelf-header">
+      <div>
+        <h2 class="shelf-title"></h2>
+        <p class="shelf-subtitle"></p>
+      </div>
+      <button class="shelf-toggle" type="button">Alle anzeigen</button>
+    </div>
+    <div class="shelf-row-wrapper">
+      <button class="shelf-arrow shelf-arrow--previous" type="button" aria-label="Zurück blättern">‹</button>
+      <ul class="shelf-row"></ul>
+      <button class="shelf-arrow shelf-arrow--next" type="button" aria-label="Weiter blättern">›</button>
+    </div>
+  </section>
+</template>
+
+<template id="book-card-template">
+  <li class="book-card">
+    <img class="book-card-cover" src="" alt="" loading="lazy">
+    <h3 class="book-card-title"></h3>
+    <p class="book-card-detail"></p>
+  </li>
+</template>
+
+<!-- SCRIPTS: book data first, then the page builder, then the shared navigation -->
+<script src="js/books.js"></script>
+<script src="js/category-page.js"></script>
+<script src="js/navigation.js"></script>
+</body>
+</html>

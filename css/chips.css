@@ -1,0 +1,50 @@
+/* ==========================================================================
+   CHIPS
+   Small rounded link buttons in a row. Used for the occasions on the
+   homepage ("Muttertag", "Hochzeit", ...), the series jump links and the
+   "Weitere Kategorien" links on the category pages.
+   ========================================================================== */
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+}
+
+.chip {
+  display: inline-block;
+  padding: 10px 18px;
+  background: white;
+  border: 1px solid var(--beige-dark);
+  border-radius: 999px;  /* fully rounded ends */
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  border-color: var(--sage);
+  color: var(--sage-dark);
+}
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   Chips stay in one row that can be swiped sideways, instead of wrapping
+   into many lines. The negative margin lets the row reach the screen edges.
+   ########################################################################## */
+@media (max-width: 768px) {
+  .chip-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -16px;
+    padding: 0 16px 8px;
+  }
+
+  .chip {
+    white-space: nowrap;
+    font-size: 14px;
+  }
+}

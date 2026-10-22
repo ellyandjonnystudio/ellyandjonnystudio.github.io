@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <!-- Placeholder book cover (2:3 ratio), used until the real covers are available -->
+
+  <!-- Background and thin inner frame -->
+  <rect width="400" height="600" fill="#EDE4D6"/>
+  <rect x="20" y="20" width="360" height="560" fill="none" stroke="#7D9B76" stroke-width="2"/>
+
+  <!-- Open book icon -->
+  <g transform="translate(200 250)" fill="none" stroke="#5C4033" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0 -30 C -25 -45 -55 -45 -80 -35 L -80 45 C -55 35 -25 35 0 50 Z"/>
+    <path d="M0 -30 C 25 -45 55 -45 80 -35 L 80 45 C 55 35 25 35 0 50 Z"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#5C4033">Cover folgt</text>
+  <text x="200" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="3" fill="#7D9B76">ELLYANDJONNY STUDIO</text>
+</svg>

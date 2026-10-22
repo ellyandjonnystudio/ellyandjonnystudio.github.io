@@ -1,0 +1,210 @@
+/* ==========================================================================
+   SHELVES (category pages)
+   One shelf per book series: a heading and a row of covers that can be
+   scrolled sideways. "Alle anzeigen" turns the row into a full grid.
+   The shelves are created by js/category-page.js.
+   ========================================================================== */
+
+/* Space between the series jump links and the first shelf */
+#series-jump-links {
+  margin-bottom: 48px;
+}
+
+.shelf {
+  margin-bottom: 56px;
+  scroll-margin-top: 24px;  /* small gap above a shelf when jumping to it via "#series-id" */
+}
+
+
+/* --------------------------------------------------------------------------
+   Shelf header: title on the left, "Alle anzeigen" button on the right
+   -------------------------------------------------------------------------- */
+.shelf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--beige-dark);
+}
+
+.shelf-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--brown);
+}
+
+.shelf-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.shelf-toggle {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  background: none;
+  border: 1px solid var(--sage);
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.shelf-toggle:hover {
+  background: var(--sage);
+  color: white;
+}
+
+
+/* --------------------------------------------------------------------------
+   Book row
+   A horizontal list that scrolls sideways; "scroll-snap" makes it stop
+   neatly at the start of a book instead of somewhere in between.
+   -------------------------------------------------------------------------- */
+.shelf-row-wrapper {
+  position: relative;  /* reference point for the arrow buttons */
+}
+
+.shelf-row {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 16px;
+  scrollbar-width: thin;
+}
+
+/* Expanded: all books wrap onto several lines instead of scrolling */
+.shelf--expanded .shelf-row {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+
+/* --------------------------------------------------------------------------
+   Book card
+   -------------------------------------------------------------------------- */
+.book-card {
+  flex: 0 0 160px;  /* fixed width, does not grow or shrink */
+  scroll-snap-align: start;
+}
+
+.book-card-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--beige-dark);  /* visible while the image is loading */
+  box-shadow: 0 3px 10px rgba(92, 64, 51, 0.15);
+}
+
+.book-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.book-card-detail {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Arrow buttons (desktop only)
+   Round buttons on the left and right edge of the row, for mouse users
+   who cannot swipe.
+   -------------------------------------------------------------------------- */
+.shelf-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--beige-dark);
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(92, 64, 51, 0.15);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--brown);
+  cursor: pointer;
+}
+
+.shelf-arrow:hover {
+  color: var(--sage-dark);
+}
+
+.shelf-arrow--previous {
+  left: -14px;
+}
+
+.shelf-arrow--next {
+  right: -14px;
+}
+
+/* No arrows and no toggle when the row is expanded or all books already fit
+   ("shelf--fits" is set by js/category-page.js) */
+.shelf--expanded .shelf-arrow,
+.shelf--fits .shelf-arrow,
+.shelf--fits .shelf-toggle {
+  display: none;
+}
+
+/* Touch screens can swipe, so the arrows are not needed there */
+@media (hover: none) {
+  .shelf-arrow {
+    display: none;
+  }
+}
+
+
+/* ##########################################################################
+   MOBILE LAYOUT (phones and small tablets, up to 768px wide)
+   ########################################################################## */
+@media (max-width: 768px) {
+
+  #series-jump-links {
+    margin-bottom: 32px;
+  }
+
+  .shelf {
+    margin-bottom: 40px;
+  }
+
+  /* Title and button stacked, so long series names have enough room */
+  .shelf-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .shelf-title {
+    font-size: 20px;
+  }
+
+  .shelf-arrow {
+    display: none;
+  }
+
+  /* Slightly smaller covers, so more than two fit next to each other */
+  .shelf-row {
+    gap: 14px;
+  }
+
+  .book-card {
+    flex-basis: 130px;
+  }
+}
